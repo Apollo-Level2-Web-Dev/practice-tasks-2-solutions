@@ -59,7 +59,7 @@ db.collection.aggregate([
 ]);
 ```
 
-#### 5. Use $facet to separate individuals into two facets based on their age: those below 30 and those above 30. Then, within each facet, bucket the individuals into age ranges and sort them by name within each bucket.
+#### 5. Use $facet to separate individuals into two facets based on their age: those below 30 and those above 30. Then, within each facet, bucket the individuals into age ranges and sort them by age within each bucket.
 
 ```javascript
 db.collection.aggregate([
@@ -77,6 +77,10 @@ db.collection.aggregate([
             },
           },
         },
+       {
+         $sort: {age: 1}
+       }
+       
       ],
       above30: [
         { $match: { age: { $gte: 30 } } },
@@ -93,6 +97,9 @@ db.collection.aggregate([
       ],
     },
   },
+ {
+   $sort: {age: 1}
+ }
 ]);
 ```
 
